@@ -110,13 +110,13 @@ export default class App extends Vue {
   }
 
   async fetch_detail() {
-    const response = await axios_api.get('ios/catalogue/detail')
+    const response = await axios_api.get('https://mock.vouchconcierge.com/ios/catalogue/detail')
     
     return response.data;
   }
 
   async fetch_home() {
-    const response = await axios_api.get('ios/catalogue/home')
+    const response = await axios_api.get('https://mock.vouchconcierge.com/ios/catalogue/home')
 
     const data = _.map(response.data.categories, (item: any) => {
       return _.merge(item, _.find(response.data.list, { category_id: item._id }));
