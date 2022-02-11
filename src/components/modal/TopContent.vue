@@ -124,10 +124,11 @@ export default class Header extends Vue {
 
   .fixed-button {
     z-index: 5000;
+    margin : 0 20px;
     position: fixed;
-    top: 25vh;
+    bottom: calc(75vh - 25px);
     left: 0;
-    width: 100%;
+    width: calc(100% - 40px);
     height: 25px;
     background: white;
   }

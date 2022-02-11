@@ -257,7 +257,7 @@ export default class Modal extends Vue {
   }
 
   .backdrop {
-    z-index: 2000;
+    z-index: 3000;
     position: fixed;
     bottom: 0;
     width: 100vw;

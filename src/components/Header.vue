@@ -39,7 +39,7 @@ export default class Header extends Vue {
   .container {
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 3000;
 
     .relative {
       position: relative;
