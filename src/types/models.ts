@@ -27,7 +27,7 @@ export interface AddonItem {
   additional_price: number
 }
 
-export interface Variants {
+export interface VariantsOption {
   _id: string
   name: string
 }
@@ -43,5 +43,12 @@ export interface Detail {
   name: string
   price: number
   tags: string[]
-  variants: Variants[]
+  variants: VariantsOption[]
+}
+
+export interface CartPayload {
+  checked: boolean
+  name: string
+  quantity?: number
+  additional_price: number
 }

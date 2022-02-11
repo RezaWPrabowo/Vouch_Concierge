@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="tabs-container">
     <a
       :href="`#${item._id}`"
       :class="['titles', { active: active === index }]"
@@ -27,7 +27,7 @@ export default class Tabs extends Vue {
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .tabs-container {
     display: flex;
     height: 40px;
     margin: 0;

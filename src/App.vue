@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div v-if="loading">
+
     </div>
 
     <div v-else>
@@ -17,8 +18,10 @@
         />
 
         <Modal
+          v-if="selected_menu"
           :show="modal"
           :data="selected_menu"
+          :detail="detail_menu"
           @close="modal = !modal"
         />
       </div>
@@ -38,6 +41,7 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import axios from 'axios'
+import { Watch } from 'vue-property-decorator'
 
 import { Home, Detail, MenuItem } from '@/types/models'
 
@@ -47,7 +51,7 @@ import Modal from '@/components/Modal.vue'
 
 const _ = require('lodash')
 
-const xios_api = axios.create({
+const axios_api = axios.create({
   responseType: 'json',
   headers: {
     'Accept': 'application/json',
@@ -64,6 +68,15 @@ const xios_api = axios.create({
   },
 })
 export default class App extends Vue {
+  @Watch('modal') onModalUpdate() {
+    if(this.modal) {
+      document.documentElement.style.overflow = 'hidden'
+    }
+    else {
+      document.documentElement.style.overflow = 'auto'
+    }
+  }
+
   home_menu: Home[] = []
   detail_menu: Detail[] = []
 
@@ -98,15 +111,13 @@ export default class App extends Vue {
   }
 
   async fetch_detail() {
-    const response = await xios_api.get('ios/catalogue/detail')
-
-    console.log(response.data)
+    const response = await axios_api.get('ios/catalogue/detail')
     
     return response.data;
   }
 
   async fetch_home() {
-    const response = await xios_api.get('ios/catalogue/home')
+    const response = await axios_api.get('ios/catalogue/home')
 
     const data = _.map(response.data.categories, (item: any) => {
       return _.merge(item, _.find(response.data.list, { category_id: item._id }));
@@ -118,13 +129,14 @@ export default class App extends Vue {
   toggle_modal(item: MenuItem) {
     this.selected_menu = item
     this.modal = true
-
-    console.log(item)
   }
 
   set_active(index) {
     this.active_index = index
-    window.scrollBy(0, -90)
+
+    setTimeout(() => {
+      window.scrollTo(window.scrollX, window.scrollY - 100)
+    }, 100);
   }
 }
 </script>
