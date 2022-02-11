@@ -55,8 +55,7 @@ const axios_api = axios.create({
   responseType: 'json',
   headers: {
     'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'Content-Type': 'application/json'
   },
 })
 
